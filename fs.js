@@ -58,6 +58,7 @@ exports.utimesSync = (path, atime, mtime) => {
 };
 
 exports.makeDir = path => makeDir(path, {fs}).catch(error => {
+	if(process.platform==="win32" && path.length===3 && path[1]===':') console.log("skipping root directory")
 	throw new CpFileError(`Cannot create directory \`${path}\`: ${error.message}`, error);
 });
 
